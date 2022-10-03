@@ -75,6 +75,6 @@ public class Catalog {
 
     }
     public void displayData(){
-        System.out.printf("%-15d-%30s%-20d%-15b\n", this.catalogId,this.catalogName, this.priority, this.catalogStatus);
+        System.out.printf("%-15d%-30s%-20d%-15s\n", this.catalogId,this.catalogName, this.priority, this.catalogStatus);
     }
 }

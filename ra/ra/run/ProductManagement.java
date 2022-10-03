@@ -56,9 +56,10 @@ public class ProductManagement {
         boolean checkout = true;
         do {
             System.out.println("*************QUẢN LÝ DANH MỤC*************");
-            System.out.println("1: quản lý danh mục");
-            System.out.println("quản lý sản phẩm");
-            System.out.println(" thoát");
+            System.out.println("1: nhập thông tin n danh mục ");
+            System.out.println("2. hiển thị thông tin danh mục theo mức độ ưu tiên");
+            System.out.println("3. cập nhập thông tin danh mục theo mã danh mục");
+            System.out.println("4. thoát");
             System.out.println("lựa chọn của bạn");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -68,7 +69,10 @@ public class ProductManagement {
                 case 2:
                     ProductManagement.showListCatalog();
                     break;
-                case 3:
+                    case  3:
+                    ProductManagement.editListCatalog();
+                        break;
+                case 4:
                     checkout = false;
                     break;
                 default:
@@ -128,7 +132,7 @@ public class ProductManagement {
         } while (checkout);
 
     }
-
+//***************** quản lý danh mục ***********************************
     public static void inputCatalogList(Scanner sc) {
         System.out.println("nhập vào số lượng danh mục cần nhập thông tin");
         int danhMuc = Integer.parseInt(sc.nextLine());
@@ -137,7 +141,10 @@ public class ProductManagement {
             listCatalog[indexCatalog] = new Catalog();
             listCatalog[indexCatalog].inputData();
             indexCatalog++;
-            System.out.println("Thêm thành công!");
+        }
+        System.out.printf("%-15s%-30s%-20s%-15s\n", "catalogId","catalogName", "priority", "catalogStatus");
+        for (int i = 0; i < danhMuc; i++) {
+            listCatalog[i].displayData();
         }
     }
 
@@ -155,7 +162,7 @@ public class ProductManagement {
                 }
 
             }
-            System.out.println("da sap xep xong theo muc do uwu tien");
+            System.out.println("đã xắp xếp xong theo mức độ ưu tiên");
 
         }
         // hien thi danh muc
@@ -182,7 +189,7 @@ public class ProductManagement {
         }
     }
 
-    // ************************ quản lý sản phảm**************
+    // ************************ quản lý sản phẩm**************
     // Nhập thông tin cho n sản phẩm
     public static void inputListProduct(Scanner sc) {
         System.out.println("nhập vào số lượng sp cần nhập thông tin");
@@ -254,7 +261,7 @@ public class ProductManagement {
         }
         System.out.printf(" có $d sp sắp hết hàng \n", count);
     }
-
+// cap nhap trang thai của sp
     public static void updateStatusProduct(Scanner sc) {
         String strUpdate = " ";
         System.out.println("cập nhập trạng thái của sp");
