@@ -58,7 +58,7 @@ public class ProductManagement {
             System.out.println("*************QUẢN LÝ DANH MỤC*************");
             System.out.println("1: nhập thông tin n danh mục ");
             System.out.println("2. hiển thị thông tin danh mục theo mức độ ưu tiên");
-            System.out.println("3. cập nhập thông tin danh mục theo mã danh mục");
+            System.out.println("3. cập nhập thông tin danh mục theo mã danh mục và chỉnh sửa");
             System.out.println("4. thoát");
             System.out.println("lựa chọn của bạn");
             int choice = Integer.parseInt(scanner.nextLine());
@@ -95,7 +95,9 @@ public class ProductManagement {
             System.out.println("5. tìm kiếm sản phẩm theo tên sản phẩm");
             System.out.println("6. thống kê số lượng và in thông tin sản phẩm sắp hết hàng");
             System.out.println("7. cặp nhập trạng thái của sản phẩm theo mã sản phẩm");
-            System.out.println("8. thoát");
+            System.out.println("8: nhập hàng");
+            System.out.println("9:xuất hàng");
+            System.out.println("10. thoát");
             System.out.print("lựa chọn của bạn\n");
             int choice2 = Integer.parseInt(scanner.nextLine());
             switch (choice2) {
@@ -122,7 +124,13 @@ public class ProductManagement {
                     ProductManagement.updateStatusProduct(scanner);
                     break;
                 case 8:
-                    // cho trở về manu chiính
+                    ProductManagement.enterProduct(scanner);
+                    break;
+                case 9:
+                    ProductManagement.outProduct();
+                    break;
+                case 10:
+                    // cho trở về manu chính
                     checkout = false;
                     break;
                 default:
@@ -150,7 +158,7 @@ public class ProductManagement {
 
     //----------------xắp xếp theo mức độ ưu tiên------------------------------------
     public static void showListCatalog() {
-        System.out.println("hiện tại có" + indexCatalog + "danh mục");
+        System.out.println("hiện tại có " +null + indexCatalog + null+ " danh mục");
         Catalog temp;
         for (int i = 0; i < indexCatalog - 1; i++) {
             for (int j = i + 1; j < indexCatalog; j++) {
@@ -166,8 +174,9 @@ public class ProductManagement {
 
         }
         // hien thi danh muc
+        System.out.printf("%-15s%-30s%-20s%-15s\n", "catalogId","catalogName", "priority", "catalogStatus");
         for (int i = 0; i < indexCatalog; i++) {
-            arrProducts[i].displayData();
+            listCatalog[i].displayData();
         }
     }
 
@@ -186,6 +195,10 @@ public class ProductManagement {
                 System.out.println("nhap muc do uu tien");
                 listCatalog[i].setPriority(Integer.parseInt(scanner.nextLine()));
             }
+        }
+        System.out.printf("%-15s%-30s%-20s%-15s\n", "catalogId","catalogName", "priority", "catalogStatus");
+        for (int i = 0; i < indexCatalog; i++) {
+            listCatalog[i].displayData();
         }
     }
 
@@ -246,6 +259,7 @@ public class ProductManagement {
                 arrProducts[i].displayData();
             }
         }
+
     }
 
     // thong ke so luong va in thong tin san pham sap het hang;
@@ -264,7 +278,7 @@ public class ProductManagement {
 // cap nhap trang thai của sp
     public static void updateStatusProduct(Scanner sc) {
         String strUpdate = " ";
-        System.out.println("cập nhập trạng thái của sp");
+        System.out.println("  nhập mã của sp muốn thay đổi: ");
         strUpdate = sc.nextLine();
         for (int i = 0; i < index; i++) {
             if (arrProducts[i].getProductId().equals(strUpdate)) {
@@ -273,6 +287,43 @@ public class ProductManagement {
 
         }
         System.out.println("đã cập nhâp thành công trạng thái của sản phẩm");
+    }
+    //nhap hang
+    public static void enterProduct(Scanner sc){
+        System.out.printf("%-15s%-30s%-15s%-30s%-30s%-10s%-20s%-15s%-20s\n", "product Id", "product Name",
+                "title", "import Price", "export Price", "quantity", " descriptions", "productStatus", "catalog");
+        for (int i = 0; i < index; i++) {
+          arrProducts[i].displayData();
+        }
+        System.out.println("nhập mặt hàng muốn nhập");
+       String put = sc.nextLine();
+        for (int i = 0; i < index; i++) {
+            if (arrProducts[i].getProductName().equals(put)){
+                System.out.println("số lượng cần nhập");
+                int slNhap = Integer.parseInt(sc.nextLine());
+                arrProducts[i].setQuantity(arrProducts[i].getQuantity()+slNhap);
+
+            }
+
+        }
+        System.out.println("đã nhập  thành công");
+    }
+
+    public static void outProduct(){
+        System.out.printf("%-15s%-30s%-15s%-30s%-30s%-10s%-20s%-15s%-20s\n", "product Id", "product Name",
+                "title", "import Price", "export Price", "quantity", " descriptions", "productStatus", "catalog");
+        for (int i = 0; i < index; i++) {
+            arrProducts[i].displayData();
+        }
+        System.out.println("nhập mặt hàng cần xuất");
+        String out = scanner.nextLine();
+        for (int i = 0; i < index; i++) {
+            if (arrProducts[i].getProductName().equals(out));
+            System.out.println(" nhập số lượng cần xuất");
+            int slXuat = Integer.parseInt(scanner.nextLine());
+            arrProducts[i].setQuantity(arrProducts[i].getQuantity()-slXuat);
+
+        }
     }
 }
 
