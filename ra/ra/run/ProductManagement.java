@@ -308,7 +308,7 @@ public class ProductManagement {
         }
         System.out.println("đã nhập  thành công");
     }
-
+// xuat hang
     public static void outProduct(){
         System.out.printf("%-15s%-30s%-15s%-30s%-30s%-10s%-20s%-15s%-20s\n", "product Id", "product Name",
                 "title", "import Price", "export Price", "quantity", " descriptions", "productStatus", "catalog");
